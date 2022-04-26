@@ -1,57 +1,41 @@
-/* body {
-  margin: 0;
-  padding: 0;
+body {
   font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 
 .App {
-  display: flex;
-  text-align: center;
-  flex-direction: row;
+ text-align: center;
 }
 
 .Header {
-  background-color:  red;
-  height: 5em;
-
   color: rgb(255,255,255);
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+ 
 }
 
 .Nav {
   background-color:  green;
- 
   color: rgb(255,255,255);
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .StatsArea {
   
-  background-color: rgb(43, 43, 63);
-  color: rgb(255,255,255);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background-color: rgb(74, 74, 172);
+  color: rgb(255,255,255); 
+  height: 100vh;
+
+  
 }
 
 .TaskArea {
   background-color:  yellow;
-  padding: 30px;
-  width: 100%;
+  height: 100vh;
+ 
+ 
 }
 
 .TaskCard {
   background-color:  pink;
-  display: flex;
-  width: 100%;
-  justify-content: center;
+  /* margin: 5%; */
+  /* padding: 5%; */
 }
 
- */
+

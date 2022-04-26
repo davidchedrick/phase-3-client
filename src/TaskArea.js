@@ -1,13 +1,28 @@
-import Button from 'react-bootstrap/Button';
+
+import { Card, Container } from "react-bootstrap";
 import TaskCard from "./TaskCard";
 
 
 function TaskArea() {
     return (
-      <div className="TaskArea">
+      <div className="TaskArea fluid ">
           TaskArea
-          <Button variant="primary">Primary</Button>
-          <TaskCard />
+          <Card>
+            <Card.Body>
+              <TaskCard /> 
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <TaskCard /> 
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <TaskCard /> 
+            </Card.Body>
+          </Card>
+        
       </div>
     );
   }
