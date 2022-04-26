@@ -9,11 +9,11 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <Nav />
+            {/* <Nav /> */}
 
-            <div>
-                <Row>
-                    <Col className="p-0" sm={10}>
+            <div className="m-0" >
+                <Row className="m-0">
+                    <Col className="TaskArea p-0" sm={10} >
                         <TaskArea />
                     </Col>
 

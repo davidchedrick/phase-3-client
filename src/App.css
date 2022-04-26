@@ -11,18 +11,18 @@ body {
 }
 
 .Nav {
-  background-color: green;
+  background-color: rgb(128, 72, 111);
   color: rgb(255, 255, 255);
 }
 
 .StatsArea {
-  background-color: rgb(74, 74, 172);
+  background-color: rgb(32, 32, 212);
   color: rgb(255, 255, 255);
   height: 100vh;
 }
 
 .TaskArea {
-  background-color: yellow;
+  background-color: rgb(235, 22, 121);
   height: 100vh;
 }
 

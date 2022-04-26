@@ -3,11 +3,13 @@ import TaskCard from "./TaskCard";
 
 function TaskArea() {
   return (
-    <div className="TaskArea fluid ">
-      TaskArea
-      <TaskCard />
+    
+      <div className="TaskArea  ">
+        
+        <TaskCard />
+      </div>
       
-    </div>
+  
   );
 }
 
