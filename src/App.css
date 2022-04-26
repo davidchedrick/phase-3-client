@@ -1,41 +1,39 @@
 body {
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
 .App {
- text-align: center;
+  text-align: center;
 }
 
 .Header {
-  color: rgb(255,255,255);
- 
+  color: rgb(255, 255, 255);
 }
 
 .Nav {
-  background-color:  green;
-  color: rgb(255,255,255);
+  background-color: green;
+  color: rgb(255, 255, 255);
 }
 
 .StatsArea {
-  
   background-color: rgb(74, 74, 172);
-  color: rgb(255,255,255); 
+  color: rgb(255, 255, 255);
   height: 100vh;
-
-  
 }
 
 .TaskArea {
-  background-color:  yellow;
+  background-color: yellow;
   height: 100vh;
- 
- 
 }
 
 .TaskCard {
-  background-color:  pink;
-  /* margin: 5%; */
-  /* padding: 5%; */
+  background-color: pink;
+  width: 12em;
+  height: 8em;
 }
 
-
+.pic {
+ 
+  width: 12em;
+  height: 10em;
+}

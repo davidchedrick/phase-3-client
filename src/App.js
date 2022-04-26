@@ -13,11 +13,11 @@ function App() {
 
             <div>
                 <Row>
-                    <Col className="p-0" sm={8}>
+                    <Col className="p-0" sm={10}>
                         <TaskArea />
                     </Col>
 
-                    <Col className="p-0" sm={4}>
+                    <Col className="p-0" sm={2}>
                         <StatsArea />
                     </Col>
                 </Row>
