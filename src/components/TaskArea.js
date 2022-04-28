@@ -7,9 +7,9 @@ function TaskArea({ tasks }) {
   .map((task) => <TaskCard key={tasks.id} task={task} />);
 
   return (
-    <div class="container">
-      <div class="row">{tasksList}</div>
-    </div>
+    
+      <div className="row m-2">{tasksList}</div>
+    
   );
 }
 

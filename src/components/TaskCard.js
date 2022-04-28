@@ -5,13 +5,26 @@ import { Card, Button} from "react-bootstrap";
 function TaskCard({ task }) {
   const { body, value } = task;
 
-  const img = body.includes("Bed") ? bed : book;
+  function img(body){
+    
+    switch(body) {
+
+      case "Make Bed": 
+        return bed
+      case "Read Book": 
+        return book
+        
+    }
+    
+  }
+
 
   return (
-    <Card className="w-25 m-3 ">
+    <Card className="w-25 m-3 "
+    >
       <Card.Body className="p-0 ">
         <Card.Img
-          src={img}
+          src={img(body)}
           className="img-fluid rounded-start pic"
           alt="..."
         ></Card.Img>
