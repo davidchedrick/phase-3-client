@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import "./App.css";
 import Header from "./Header";
-// import Loading from "./Loading";
+import Loading from "./Loading";
 
 import StatsArea from "./StatsArea";
 import TaskArea from "./TaskArea";
@@ -13,14 +13,14 @@ function App() {
   const [fetchRequest, setFetchRequest] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const BASE_URL = "";
+  const BASE_URL = "http://localhost:9292";
 
   useEffect(() => {
     fetchTasks();
   }, [fetchRequest]);
 
   function fetchTasks() {
-    fetch(BASE_URL)
+    fetch(BASE_URL + "/tasks")
       .then((resp) => resp.json())
       .then((tasks) => {
         setTasks(tasks);
@@ -41,7 +41,7 @@ function App() {
           <Col className="TaskArea p-0" sm={10}>
             <TaskArea tasks={tasks} />
           </Col>
-
+            
           <Col className="p-0" sm={2}>
             <StatsArea />
           </Col>
