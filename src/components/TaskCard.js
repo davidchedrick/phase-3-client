@@ -1,27 +1,31 @@
 import bed from "../images/bed.webp";
 import book from "../images/book.webp";
-import { Card, Button} from "react-bootstrap";
+import clean from "../images/clean.webp";
+import pet from "../images/pet.webp";
+import plate from "../images/plate.webp";
+
+import { Card, Button } from "react-bootstrap";
 
 function TaskCard({ task }) {
   const { body, value } = task;
 
-  function img(body){
-    
-    switch(body) {
-
-      case "Make Bed": 
-        return bed
-      case "Read Book": 
-        return book
-        
+  function img(body) {
+    switch (body) {
+      case "Make Bed":
+        return bed;
+      case "Read Book":
+        return book;
+      case "Clean Room":
+        return clean;
+      case "Feed Pet":
+        return pet;
+      case "Set Plates":
+        return plate;
     }
-    
   }
 
-
   return (
-    <Card className="w-25 m-3 "
-    >
+    <Card className="w-25 m-3 ">
       <Card.Body className="p-0 ">
         <Card.Img
           src={img(body)}

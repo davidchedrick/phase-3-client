@@ -1,10 +1,11 @@
 import TaskCard from "./TaskCard";
 
 function TaskArea({ tasks }) {
+ 
   
   const tasksList = [...tasks]
   .reverse()
-  .map((task) => <TaskCard key={tasks.id} task={task} />);
+  .map((task) => <TaskCard key={task.id} task={task} />);
 
   return (
     
