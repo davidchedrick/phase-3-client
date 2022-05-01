@@ -1,12 +1,16 @@
-// import { Route, Switch, useHistory } from 'react-router-dom';
+
+
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { Route, Switch } from "react-router-dom";
+
 import "./App.css";
 import Header from "./Header";
 import Loading from "./Loading";
 
 import StatsArea from "./StatsArea";
 import TaskArea from "./TaskArea";
+import UserArea from "./UserArea";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -29,13 +33,18 @@ function App() {
       });
   }
 
-  // if (!isLoaded) return <h2><Loading /></h2>;
+  if (!isLoaded) return <h2><Loading /></h2>;
 
   return (
     <div className="App">
       <Header />
-      {/* <Nav /> */}
+      <Switch>
+        <Route path="/userArea">
+          <UserArea/>
+        </Route>
 
+
+      <Route path="/">
       <div className="m-0">
         <Row className="m-0">
           <Col className="TaskArea p-0" sm={10}>
@@ -47,6 +56,12 @@ function App() {
           </Col>
         </Row>
       </div>
+      </Route>
+
+      <Route path="*">
+                        <h1>404 not found</h1>
+                    </Route>
+      </Switch>
     </div>
   );
 }

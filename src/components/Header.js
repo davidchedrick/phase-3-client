@@ -6,7 +6,7 @@ function Header() {
       <Container>
      
         
-        <Navbar.Brand href="#home">BodhiCat's Chores List</Navbar.Brand>
+        <Navbar.Brand href="/">BodhiCat's Chores List</Navbar.Brand>
         <NavLink exact  to="/userArea">
           <i className="bi bi-gear p-0 "></i>
         </NavLink>
