@@ -29,9 +29,22 @@ body {
   height: 100vh;
 }
 
-.TaskArea, .UserArea{
+.TaskArea, .UserArea, .LogIn {
   background-color: rgb(235, 22, 121);
   height: 100vh;
+}
+
+
+
+.LogIn img{
+
+  width: auto;
+  height: auto;
+
+  border: 3px solid rgb(133, 26, 40);
+  border-radius:25px;
+  box-shadow: 5px 3px 40px rgba(109, 13, 13, 0.75), -5px -3px 40px rgba(15, 1, 1, 0.75);
+  
 }
 
 .UserArea div {

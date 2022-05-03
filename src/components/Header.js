@@ -13,7 +13,7 @@ function Header() {
           className="Header d-inline-block align-top  "
         />
         
-        <Navbar.Brand className="Header " href="/">BodhiCat's Chore List</Navbar.Brand>
+        <Navbar.Brand className="Header " href="">BodhiCat's Chore List</Navbar.Brand>
         <NavLink exact  to="/userArea">
           <i className="bi bi-gear p-0 "></i>
         </NavLink>

@@ -3,9 +3,8 @@
 function StatsArea() {
   return (
     <div className="StatsArea fluid pd-0">
-        StatsArea
 
-        <div>   
+        <div className="p-2">   
           Points
           ⭐
           0
