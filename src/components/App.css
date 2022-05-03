@@ -34,6 +34,19 @@ body {
   height: 100vh;
 }
 
+.UserArea div {
+  display: flex;
+  justify-content: end;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.UserArea button {
+  color: rgb(50, 101, 241);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgb(8, 1, 1); 
+}
+
 .TaskCard {
   background-color: pink;
   width: 12em;

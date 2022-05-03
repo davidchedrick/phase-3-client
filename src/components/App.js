@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Route, Switch, useHistory  } from "react-router-dom";
-
+import { LogInContext } from '../context/user';
 import "./App.css";
 import Header from "./Header";
 import Loading from "./Loading";
+import LogIn from "./LogIn";
 
 import StatsArea from "./StatsArea";
 import TaskArea from "./TaskArea";
@@ -14,7 +15,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [fetchRequest, setFetchRequest] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const [logIn] = useContext(LogInContext);
   const history = useHistory();
 
   const BASE_URL = "http://localhost:9292";
@@ -41,6 +42,14 @@ function App() {
     history.push("/");
 }
 
+if(!logIn){
+  return(
+      <div  className='App'>
+         <LogIn />
+      </div>
+  )
+}
+
   if (!isLoaded)
     return (
       <h2>
@@ -55,6 +64,10 @@ function App() {
 
       <Switch>
         <Route path="/userArea">
+          <UserArea />
+        </Route>
+
+        <Route path="/LogIn">
           <UserArea />
         </Route>
 

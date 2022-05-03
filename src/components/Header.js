@@ -1,6 +1,6 @@
 import { Container, Navbar } from "react-bootstrap";
-import disCat from "../images/disCat.png";
 import { NavLink } from 'react-router-dom';
+import disCat from "../images/disCat.png";
 function Header() {
   return (
     <Navbar className="Header " bg="dark" variant="dark">
