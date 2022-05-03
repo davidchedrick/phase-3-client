@@ -1,8 +1,6 @@
-
-
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory  } from "react-router-dom";
 
 import "./App.css";
 import Header from "./Header";
@@ -16,6 +14,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [fetchRequest, setFetchRequest] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const history = useHistory();
 
   const BASE_URL = "http://localhost:9292";
 
@@ -33,34 +33,53 @@ function App() {
       });
   }
 
-  if (!isLoaded) return <h2><Loading /></h2>;
+  function handleDeleteTask(id) {
+    fetch(BASE_URL + `/tasks/${id}`, {
+        method: "DELETE"
+    })
+    .then(setFetchRequest(fetchRequest => !fetchRequest))
+    history.push("/");
+}
+
+  if (!isLoaded)
+    return (
+      <h2>
+        <Loading />
+      </h2>
+    );
 
   return (
     <div className="App">
+
       <Header />
+
       <Switch>
         <Route path="/userArea">
-          <UserArea/>
+          <UserArea />
         </Route>
 
+        <Route path="/">
+          <div className="m-0">
+            <Row className="m-0">
 
-      <Route path="/">
-      <div className="m-0">
-        <Row className="m-0">
-          <Col className="TaskArea p-0" sm={10}>
-            <TaskArea tasks={tasks} />
-          </Col>
-            
-          <Col className="p-0" sm={2}>
-            <StatsArea />
-          </Col>
-        </Row>
-      </div>
-      </Route>
+              <Col className="TaskArea p-0" sm={10}>
+                <TaskArea 
+                tasks={tasks} 
+                handleDeleteTask={handleDeleteTask}
+                />
+              </Col>
 
-      <Route path="*">
-                        <h1>404 not found</h1>
-                    </Route>
+              <Col className="p-0" sm={2}>
+                <StatsArea />
+              </Col>
+
+            </Row>
+          </div>
+        </Route>
+
+        <Route path="*">
+          <h1>404 not found</h1>
+        </Route>
       </Switch>
     </div>
   );

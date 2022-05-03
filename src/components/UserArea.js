@@ -3,7 +3,7 @@
 function UserArea() {
     return (
       <div className="UserArea">
-          UserArea
+          
       </div>
     );
   }

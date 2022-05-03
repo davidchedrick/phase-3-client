@@ -1,11 +1,15 @@
 import TaskCard from "./TaskCard";
 
-function TaskArea({ tasks }) {
+function TaskArea({ tasks, handleDeleteTask }) {
  
   
   const tasksList = [...tasks]
   .reverse()
-  .map((task) => <TaskCard key={task.id} task={task} />);
+  .map((task) => <TaskCard 
+    key={task.id} 
+    task={task} 
+    handleDeleteTask={handleDeleteTask}
+  />);
 
   return (
     
