@@ -24,6 +24,9 @@ function LogIn() {
 
   return (
     <div className="LogIn">
+
+      <div className="logo-title">BodhiCat's Chore List</div>
+
       <div className="p-5">
         <img
           alt=""

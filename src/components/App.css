@@ -9,7 +9,50 @@ body {
 .Header {
   color: rgb(255, 255, 255);
   font-size: 35px;
+}
+
+.logo-title {
+  background: linear-gradient(
+    -66deg,
+    #000000,
+    #133eff,
+    #990099,
+    #06a36f,
+    #060014,
+    #022ff8,
+    #d130d1,
+    #5eff00
+  );
+  background-size: 400%;
+  padding-top: 10%;
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: 55px;
+  letter-spacing: -6px;
   
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glimmer 6s ease-in-out infinite;
+  -moz-animation: glimmer 6s ease-in-out infinite;
+  -webkit-animation: glimmer 6s ease-in-out infinite;
+}
+
+@keyframes glimmer {
+  0% {
+    background-position: 0px 50%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 0px 50%;
+  }
 }
 
 .Header img {
@@ -29,22 +72,21 @@ body {
   height: 100vh;
 }
 
-.TaskArea, .UserArea, .LogIn {
+.TaskArea,
+.UserArea,
+.LogIn {
   background-color: rgb(235, 22, 121);
   height: 100vh;
 }
 
-
-
-.LogIn img{
-
+.LogIn img {
   width: auto;
   height: auto;
 
   border: 3px solid rgb(133, 26, 40);
-  border-radius:25px;
-  box-shadow: 5px 3px 40px rgba(109, 13, 13, 0.75), -5px -3px 40px rgba(15, 1, 1, 0.75);
-  
+  border-radius: 25px;
+  box-shadow: 5px 3px 40px rgba(109, 13, 13, 0.75),
+    -5px -3px 40px rgba(15, 1, 1, 0.75);
 }
 
 .UserArea div {
@@ -56,8 +98,8 @@ body {
 
 .UserArea button {
   color: rgb(50, 101, 241);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-color: rgb(8, 1, 1); 
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(8, 1, 1);
 }
 
 .TaskCard {
@@ -67,7 +109,6 @@ body {
 }
 
 .pic {
- 
   width: 12em;
   height: 10em;
 }
