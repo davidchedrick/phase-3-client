@@ -1,14 +1,26 @@
 import { useContext, useState } from "react";
 import { UserContext, LogInContext } from "../context/user";
-import Header from "./Header";
 import { useHistory } from "react-router-dom";
 import hideCat from "../images/hideCat.png";
 
 function LogIn() {
   const [formData, setFormData] = useState("");
   const [user, setUser] = useContext(UserContext);
+  console.log('user: ', user);
   const [logIn, setLogIn] = useContext(LogInContext);
   const history = useHistory();
+  const BASE_URL = "http://localhost:9292";
+
+  function fetchUsers(username) {
+      console.log('username: ', username);
+    fetch(BASE_URL + `/users`)
+      .then((resp) => resp.json())
+      .then((user) => {
+        const currentUser = user.filter(name => name.username === username)
+        console.log('currentUser: ', currentUser);
+        setUser(currentUser.username)
+      });
+  }
 
   function handleChange(e) {
     let targetValue = e.target.value;
@@ -17,9 +29,11 @@ function LogIn() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setUser(formData);
-    setLogIn(true);
-    history.push("/");
+    // setUser(formData);
+    console.log('formData: ', formData);
+    fetchUsers(formData)
+    // setLogIn(true);
+    // history.push("/");
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Route, Switch, useHistory  } from "react-router-dom";
-import { LogInContext } from '../context/user';
+import { LogInContext, UserContext } from '../context/user';
 import "./App.css";
 import Header from "./Header";
 import Loading from "./Loading";
@@ -17,7 +17,8 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [logIn] = useContext(LogInContext);
   const history = useHistory();
-
+  const [user, setUser] = useContext(UserContext);
+  console.log('user: ', user);
   const BASE_URL = "http://localhost:9292";
 
   useEffect(() => {
