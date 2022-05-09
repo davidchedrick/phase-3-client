@@ -4,41 +4,65 @@ import { useHistory } from "react-router-dom";
 import hideCat from "../images/hideCat.png";
 
 function LogIn() {
-  const [formData, setFormData] = useState("");
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
   const [user, setUser] = useContext(UserContext);
-  console.log('user: ', user);
   const [logIn, setLogIn] = useContext(LogInContext);
+
   const history = useHistory();
   const BASE_URL = "http://localhost:9292";
 
-  function fetchUsers(username) {
-      console.log('username: ', username);
+  function fetchUsers(userForm) {
     fetch(BASE_URL + `/users`)
       .then((resp) => resp.json())
-      .then((user) => {
-        const currentUser = user.filter(name => name.username === username)
-        console.log('currentUser: ', currentUser);
-        setUser(currentUser.username)
-      });
+      .then((users) => checkUser(users, userForm));
   }
 
-  function handleChange(e) {
+  function checkUser(users, userForm) {
+    const currentUser = users.filter(
+      (userData) =>
+        userData.username === userForm.username &&
+        userData.password === userForm.password
+    );
+
+    console.log("currentUser ", Boolean(currentUser[0]));
+    console.log('currentUser: ', currentUser);
+
+    currentUser[0] ? userIn(currentUser) : signUp()
+    
+  
+  } 
+
+  function userIn(currentUser) {
+    setUser(currentUser[0].username);
+    setLogIn(true);
+    history.push("/");
+  }
+
+  function signUp() {
+    console.log("cat")
+  }
+
+  function handleFormData(e) {
+    let targetName = e.target.name;
     let targetValue = e.target.value;
-    setFormData(targetValue);
+
+    setFormData({
+      ...formData,
+      [targetName]: targetValue,
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setUser(formData);
-    console.log('formData: ', formData);
-    fetchUsers(formData)
-    // setLogIn(true);
-    // history.push("/");
+    fetchUsers(formData);
   }
 
   return (
     <div className="LogIn">
-
       <div className="logo-title">BodhiCat's Chore List</div>
 
       <div className="p-5">
@@ -53,13 +77,13 @@ function LogIn() {
             type="text"
             placeholder="Username"
             name="username"
-            onChange={handleChange}
+            onChange={handleFormData}
           />
           <input
             type="text"
             placeholder="Password"
             name="password"
-            onChange={handleChange}
+            onChange={handleFormData}
           />
           <input type="submit"></input>
         </form>
