@@ -7,6 +7,7 @@ import plate from "../images/plate.webp";
 import { Card, Button } from "react-bootstrap";
 
 function TaskCard({ task, handleDeleteTask }) {
+  console.log('task: ', task);
   const { body, value, id } = task;
 
   function img(body) {
@@ -21,6 +22,7 @@ function TaskCard({ task, handleDeleteTask }) {
         return pet;
       case "Set Plates":
         return plate;
+      default:
     }
   }
 

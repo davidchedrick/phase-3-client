@@ -20,7 +20,7 @@ function UserArea() {
     return (
       <div>
         <div>
-        {logIn ? `Welcome, ${user} ` : ""}
+        {logIn ? `Welcome, ${user.username} ` : ""}
         </div>
       <div className="UserArea">
           <div><Button onClick={handleLogOut} >Log Out</Button></div>

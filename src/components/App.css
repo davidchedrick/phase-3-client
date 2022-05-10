@@ -112,3 +112,18 @@ body {
   width: 12em;
   height: 10em;
 }
+
+.button-color {
+  color: #e9e9e9;
+  background-color: #9622b942;
+  border-radius: 25px;
+}
+
+.button-color:hover {
+  color: #e9e9e9;
+  background-color: #9622b9;
+  border: 3px solid rgb(133, 26, 40);
+  border-radius: 25px;
+  box-shadow: 5px 3px 40px rgba(109, 13, 13, 0.75),
+    -5px -3px 40px rgba(15, 1, 1, 0.75);
+}

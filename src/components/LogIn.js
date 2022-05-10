@@ -3,6 +3,9 @@ import { UserContext, LogInContext } from "../context/user";
 import { useHistory } from "react-router-dom";
 import hideCat from "../images/hideCat.png";
 
+import { Route } from "react-router-dom";
+import SignUp from "./SignUp";
+
 function LogIn() {
 
   const [formData, setFormData] = useState({
@@ -27,17 +30,11 @@ function LogIn() {
         userData.username === userForm.username &&
         userData.password === userForm.password
     );
-
-    console.log("currentUser ", Boolean(currentUser[0]));
-    console.log('currentUser: ', currentUser);
-
     currentUser[0] ? userIn(currentUser) : signUp()
-    
-  
   } 
 
   function userIn(currentUser) {
-    setUser(currentUser[0].username);
+    setUser(currentUser[0]);
     setLogIn(true);
     history.push("/");
   }
@@ -87,6 +84,9 @@ function LogIn() {
           />
           <input type="submit"></input>
         </form>
+        <Route exact  to="/SignUp">
+          <SignUp/>
+        </Route>
       </div>
     </div>
   );
