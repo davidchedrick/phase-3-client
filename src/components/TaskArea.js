@@ -2,17 +2,18 @@ import { Container } from "react-bootstrap";
 import ChildCard from "./ChildCard";
 import TaskCard from "./TaskCard";
 
-function TaskArea({ tasks, handleDeleteTask, userChildren }) {
+function TaskArea({ tasks, handleDeleteTask, userChildren, fetchTask }) {
+  console.log('tasksArea: ', tasks);
  
-  const currentChildren = [...userChildren.children]
-  console.log('currentChildren: ', currentChildren);
+  const currentChildren = userChildren.children
   
-  
+
 
   const childrenList = currentChildren.map(child => 
     <ChildCard 
       key={child.id}
       child={child}
+      fetchTask={fetchTask}
     />
   )
 

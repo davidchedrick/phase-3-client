@@ -27,27 +27,30 @@ function App() {
   // }, [fetchRequest]);
 
   function fetchChildren(currentUser) {
+    
     fetch(BASE_URL + `/users/${currentUser.id}`)
       .then((resp) => resp.json())
       .then((children) => {
         
-
+       
         setChildren(children);
         setIsLoaded(true);
         //setFetchRequest(false);
       });
   }
 
-  function fetchTask(user) {
+  function fetchTask(selectChild) {
     
-    fetch(BASE_URL + `/tasks`)
+    
+    fetch(BASE_URL + `/children/${selectChild.id}`)
       .then((resp) => resp.json())
       .then((task) => {
+        // console.table('task: ', task.tasks);
         
 
-        setChildren(task);
-        setIsLoaded(true);
-        setFetchRequest(false);
+        setTasks(task.tasks);
+        // setIsLoaded(true);
+        //setFetchRequest(false);
       });
   }
   
@@ -109,6 +112,7 @@ function App() {
                 userChildren={children}
                 tasks={tasks} 
                 handleDeleteTask={handleDeleteTask}
+                fetchTask={fetchTask}
                 />
               </Col>
 
