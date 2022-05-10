@@ -6,7 +6,7 @@ import hideCat from "../images/hideCat.png";
 import { Route } from "react-router-dom";
 import SignUp from "./SignUp";
 
-function LogIn() {
+function LogIn({ fetchChildren }) {
 
   const [formData, setFormData] = useState({
     username: "",
@@ -36,6 +36,7 @@ function LogIn() {
   function userIn(currentUser) {
     setUser(currentUser[0]);
     setLogIn(true);
+    fetchChildren(currentUser[0])
     history.push("/");
   }
 

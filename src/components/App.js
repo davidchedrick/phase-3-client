@@ -23,24 +23,33 @@ function App() {
   const BASE_URL = "http://localhost:9292";
   
   // useEffect(() => {
-    
-  //   fetchChildren();
+  //   fetchTask();
   // }, [fetchRequest]);
-// /tasks
-  function fetchChildren(user) {
-    console.log(user)
-    fetch(BASE_URL + `/users/${user.id}`)
+
+  function fetchChildren(currentUser) {
+    fetch(BASE_URL + `/users/${currentUser.id}`)
       .then((resp) => resp.json())
       .then((children) => {
-        console.log('children:!!! ', children);
+        
 
-        //setChildren(children);
-        // setIsLoaded(true);
+        setChildren(children);
+        setIsLoaded(true);
         //setFetchRequest(false);
       });
   }
 
-  
+  function fetchTask(user) {
+    
+    fetch(BASE_URL + `/tasks`)
+      .then((resp) => resp.json())
+      .then((task) => {
+        
+
+        setChildren(task);
+        setIsLoaded(true);
+        setFetchRequest(false);
+      });
+  }
   
 
   function handleDeleteTask(id) {
@@ -54,15 +63,16 @@ function App() {
   if(!logIn){
     return(
         <div  className='App'>
-          <LogIn />
+          <LogIn fetchChildren={fetchChildren}/>
         </div>
     )
   }
 
   
-  if(logIn){
-    fetchChildren(user)
-  }
+  // function init(user){
+  //   fetchChildren(user)
+  // }
+  
 
 
   // if (!isLoaded)
@@ -82,7 +92,7 @@ function App() {
       <Switch>
 
         <Route path="/LogIn">
-          <LogIn />
+          <LogIn fetchChildren={fetchChildren}/>
         </Route>
 
         <Route path="/UserArea">
@@ -96,7 +106,7 @@ function App() {
 
               <Col className="TaskArea p-0" sm={10}>
                 <TaskArea 
-                children={children}
+                userChildren={children}
                 tasks={tasks} 
                 handleDeleteTask={handleDeleteTask}
                 />
