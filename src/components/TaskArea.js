@@ -3,13 +3,13 @@ import ChildCard from "./ChildCard";
 import TaskCard from "./TaskCard";
 
 function TaskArea({ tasks, handleDeleteTask, userChildren, fetchTask }) {
-  console.log('tasksArea: ', tasks);
+  
  
   const currentChildren = userChildren.children
   
 
 
-  const childrenList = currentChildren.map(child => 
+  const childrenList = currentChildren?.map(child => 
     <ChildCard 
       key={child.id}
       child={child}
@@ -17,9 +17,7 @@ function TaskArea({ tasks, handleDeleteTask, userChildren, fetchTask }) {
     />
   )
 
-  const tasksList = [...tasks]
-  .reverse()
-  .map((task) => <TaskCard 
+  const tasksList = tasks?.map((task) => <TaskCard 
     key={task.id} 
     task={task} 
     handleDeleteTask={handleDeleteTask}

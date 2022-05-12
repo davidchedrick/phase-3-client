@@ -7,14 +7,14 @@ import { Route } from "react-router-dom";
 import SignUp from "./SignUp";
 
 function LogIn({ fetchChildren }) {
-
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [signInFailed, setSignInFailed] = useState(false);
+  console.log('signInFailed: ', signInFailed);
   const [user, setUser] = useContext(UserContext);
   const [logIn, setLogIn] = useContext(LogInContext);
-
   const history = useHistory();
   const BASE_URL = "http://localhost:9292";
 
@@ -30,18 +30,15 @@ function LogIn({ fetchChildren }) {
         userData.username === userForm.username &&
         userData.password === userForm.password
     );
-    currentUser[0] ? userIn(currentUser) : signUp()
-  } 
+    currentUser[0] ? userIn(currentUser) : setSignInFailed(true)
+  }
 
   function userIn(currentUser) {
     setUser(currentUser[0]);
+    fetchChildren(currentUser[0]);
     setLogIn(true);
-    fetchChildren(currentUser[0])
+    setSignInFailed(false)
     history.push("/");
-  }
-
-  function signUp() {
-    console.log("cat")
   }
 
   function handleFormData(e) {
@@ -57,6 +54,10 @@ function LogIn({ fetchChildren }) {
   function handleSubmit(e) {
     e.preventDefault();
     fetchUsers(formData);
+    setFormData({
+      username: "",
+      password: "",
+    });
   }
 
   return (
@@ -65,7 +66,7 @@ function LogIn({ fetchChildren }) {
 
       <div className="p-5">
         <img
-          alt=""
+          alt="cutie cat"
           src={hideCat}
           className="Header d-inline-block align-top  "
         />
@@ -84,9 +85,15 @@ function LogIn({ fetchChildren }) {
             onChange={handleFormData}
           />
           <input type="submit"></input>
+          {signInFailed? 
+          <h3 className="mt-3">Try Again or Sign Up</h3>
+          :null}
         </form>
-        <Route exact  to="/SignUp">
-          <SignUp/>
+        <Route exact to="/SignUp">
+          <SignUp 
+            setSignInFailed={setSignInFailed}
+            signInFailed={signInFailed}
+          />
         </Route>
       </div>
     </div>

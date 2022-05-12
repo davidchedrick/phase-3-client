@@ -7,7 +7,7 @@ function ChildCard({ child, fetchTask }) {
 
   function handleCLick() {
     const selectChild = child
-    console.log('selectChild: ', selectChild);
+    
     fetchTask(selectChild)
   }
 

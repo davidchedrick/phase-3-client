@@ -2,6 +2,9 @@ import { Container, Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import disCat from "../images/disCat.png";
 function Header() {
+
+
+
   return (
     <Navbar className="Header " bg="dark" variant="dark">
       <Container>
@@ -14,7 +17,7 @@ function Header() {
         />
         
         <Navbar.Brand className="Header " href="">BodhiCat's Chore List</Navbar.Brand>
-        <NavLink exact  to="/userArea">
+        <NavLink  exact  to="/userArea">
           <i className="bi bi-gear p-0 "></i>
         </NavLink>
         

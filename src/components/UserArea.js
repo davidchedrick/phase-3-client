@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useContext } from 'react';
 import { UserContext, LogInContext } from '../context/user';
 
-function UserArea() {
+function UserArea({ setTasks, setChildren }) {
 
   const [user, setUser] = useContext(UserContext);
   const [logIn, setLogIn] = useContext(LogInContext);
@@ -13,7 +13,9 @@ function UserArea() {
 
   function handleLogOut() {
     setLogIn(false);
-    setUser(null);
+    setUser([]);
+    setChildren([])
+    setTasks([])
     history.push('/LogIn');
 }
 

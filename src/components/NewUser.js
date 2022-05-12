@@ -1,45 +1,41 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { LogInContext, UserContext } from "../context/user";
+// import { LogInContext, UserContext } from "../context/user";
 
-function NewUser() {
+function NewUser({ setSignInFailed }) {
     //start
     const [formData, setFormData] = useState({
         username: "",
         password: "",
     });
-    const [user, setUser] = useContext(UserContext);
-    const [logIn, setLogIn] = useContext(LogInContext);
+    // const [user, setUser] = useContext(UserContext);
+    // const [logIn, setLogIn] = useContext(LogInContext);
 
     const history = useHistory();
     const BASE_URL = "http://localhost:9292";
 
-    
-    function fetchUsers(userForm) {
-        fetch(BASE_URL + `/users`)
-          .then((resp) => resp.json())
-          .then((users) => checkUser(users, userForm));
-    }
 
-    function checkUser(users, userForm) {
-        const currentUser = users.filter(
-          (userData) =>
-            userData.username === userForm.username &&
-            userData.password === userForm.password
-        );
-        currentUser[0] ? userIn(currentUser) : console.log("cat656565")
-    }
-      
-    function userIn(currentUser) {
-        setUser(currentUser[0].username);
-        setLogIn(true);
-        //history.push("/");
+    const configObj = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    };
+    
+    function postUser() {
+        fetch(BASE_URL + `/users`, configObj)
+        .then((resp) => resp.json())
+        .then((user) => {
+              console.log(user)
+          })
     }
 
     function handleFormData(e) {
         let targetName = e.target.name;
         let targetValue = e.target.value;
-        console.log('e: ', e.target.value);
+        
         setFormData({
           ...formData,
           [targetName]: targetValue,
@@ -48,8 +44,8 @@ function NewUser() {
     
     function handleSubmit(e) {
         e.preventDefault();
-        
-        fetchUsers(formData);
+        postUser();
+        setSignInFailed(false);
     }
     
 

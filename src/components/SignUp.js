@@ -3,11 +3,14 @@ import { useState } from "react"
 import { Button, Container } from "react-bootstrap"
 import NewUser from "./NewUser"
 
-function SignUp() {
+function SignUp({ signInFailed, setSignInFailed }) {
 
     const [isClicked, setIsClicked] = useState(false)
     
-
+    function handleClick() {
+        setIsClicked(isClicked => !isClicked)
+        setSignInFailed(true)
+    }
     return(
         <Container>
             <div>
@@ -15,12 +18,15 @@ function SignUp() {
             </div>
         <Button 
             className="button-color mt-3 btn-light"
-            onClick={() => setIsClicked(isClicked => !isClicked)}
+            onClick={handleClick}
         >
             Sign Up
         </Button>
 
-        {isClicked ?  <NewUser />: null}
+        {isClicked && signInFailed === true?  
+        <NewUser 
+            setSignInFailed={setSignInFailed}
+        />: null}
         </Container>
     )
 }

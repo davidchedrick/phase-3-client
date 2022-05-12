@@ -7,7 +7,7 @@ import plate from "../images/plate.webp";
 import { Card, Button } from "react-bootstrap";
 
 function TaskCard({ task, handleDeleteTask }) {
-  console.log('task: ', task);
+  
   const { body, value, id } = task;
 
   function img(body) {
@@ -39,7 +39,7 @@ function TaskCard({ task, handleDeleteTask }) {
         <Card.Text>{value} ⭐</Card.Text>
       </Card.Body>
 
-      <Button variant="danger" size="lg" onClick={() => handleDeleteTask(id)}>
+      <Button variant="danger" size="lg" onClick={() => handleDeleteTask(task)}>
         DONE
       </Button>
     </Card>
