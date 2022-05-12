@@ -1,35 +1,47 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
-import { useContext } from 'react';
-import { UserContext, LogInContext } from '../context/user';
+import { Button, ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
+import { useContext } from "react";
+import { UserContext, LogInContext } from "../context/user";
 
-function UserArea({ setTasks, setChildren }) {
 
-  const [user, setUser] = useContext(UserContext);
-  const [logIn, setLogIn] = useContext(LogInContext);
+function UserArea({ setTasks, setChildren, setCurrentPoints }) {
+    const [user, setUser] = useContext(UserContext);
+    const [logIn, setLogIn] = useContext(LogInContext);
 
-  const history = useHistory();
+    const history = useHistory();
 
-  function handleLogOut() {
-    setLogIn(false);
-    setUser([]);
-    setChildren([])
-    setTasks([])
-    history.push('/LogIn');
-}
+    function handleLogOut() {
+        setLogIn(false);
+        setUser([]);
+        setChildren([]);
+        setTasks([]);
+        setCurrentPoints(null);
+        history.push("/LogIn");
+    }
 
     return (
-      <div>
         <div>
-        {logIn ? `Welcome, ${user.username} ` : ""}
+            <div>{logIn ? `Welcome, ${user.username} ` : ""}</div>
+
+            <div className="UserArea p-3">
+                <div className="d-flex justify-content-between">
+                <ButtonGroup>
+                    <Button>Add Child</Button>
+                    <Button>Add Tasks</Button>
+                 
+        
+                    
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button onClick={handleLogOut}>Log Out</Button>
+
+                </ButtonGroup>
+                
+                </div>
+            </div>
         </div>
-      <div className="UserArea">
-          <div><Button onClick={handleLogOut} >Log Out</Button></div>
-          
-      </div>
-      </div>
     );
-  }
-  
-  export default UserArea;
+}
+
+export default UserArea;
