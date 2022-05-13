@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext, LogInContext } from "../context/user";
 import { useHistory } from "react-router-dom";
 import hideCat from "../images/hideCat.png";
@@ -12,20 +12,25 @@ function LogIn({ fetchChildren }) {
     password: "",
   });
   const [signInFailed, setSignInFailed] = useState(false);
-  console.log('signInFailed: ', signInFailed);
+  const [allUsers, setAllUsers] = useState("")
   const [user, setUser] = useContext(UserContext);
   const [logIn, setLogIn] = useContext(LogInContext);
   const history = useHistory();
   const BASE_URL = "http://localhost:9292";
 
-  function fetchUsers(userForm) {
+
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  function fetchUsers() {
     fetch(BASE_URL + `/users`)
       .then((resp) => resp.json())
-      .then((users) => checkUser(users, userForm));
+      .then((users) => setAllUsers(users));
   }
 
-  function checkUser(users, userForm) {
-    const currentUser = users.filter(
+  function checkUser(userForm) {
+    const currentUser = allUsers.filter(
       (userData) =>
         userData.username === userForm.username &&
         userData.password === userForm.password
@@ -46,14 +51,17 @@ function LogIn({ fetchChildren }) {
     let targetValue = e.target.value;
 
     setFormData({
+      
       ...formData,
       [targetName]: targetValue,
     });
+    
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetchUsers(formData);
+    checkUser(formData);
+    
     setFormData({
       username: "",
       password: "",
@@ -71,7 +79,7 @@ function LogIn({ fetchChildren }) {
           className="Header d-inline-block align-top  "
         />
 
-        <form className="p-3" onSubmit={handleSubmit}>
+        <form className="p-3 mt-2" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Username"
@@ -93,6 +101,7 @@ function LogIn({ fetchChildren }) {
           <SignUp 
             setSignInFailed={setSignInFailed}
             signInFailed={signInFailed}
+            allUsers={allUsers}
           />
         </Route>
       </div>
