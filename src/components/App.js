@@ -17,17 +17,15 @@ function App() {
     const [currentPoints, setCurrentPoints] = useState(null);
 
     console.log("currentPoints: ", currentPoints);
-    // const [fetchRequest, setFetchRequest] = useState(false);
+  
     const [isLoaded, setIsLoaded] = useState(false);
     const [logIn] = useContext(LogInContext);
 
     const history = useHistory();
-    // const [user, setUser] = useContext(UserContext);
+   
     const BASE_URL = "http://localhost:9292";
 
-    // useEffect(() => {
-    //   fetchTask();
-    // }, [fetchRequest]);
+   
 
     function fetchChildren(currentUser) {
         fetch(BASE_URL + `/users/${currentUser.id}`)
@@ -35,7 +33,7 @@ function App() {
             .then(children => {
                 checkChildren(children);
                 setIsLoaded(true);
-                //setFetchRequest(false);
+               
             });
     }
 
@@ -50,7 +48,7 @@ function App() {
                 checkTask(task);
                 setIsLoaded(true);
                 setCurrentPoints(task.points);
-                //setFetchRequest(false);
+               
             });
     }
 
@@ -66,7 +64,7 @@ function App() {
         setTasks(updatedTask);
 
         updatePoints(currentTask);
-        // history.push("/");
+      
     }
 
     function updatePoints(currentTask) {

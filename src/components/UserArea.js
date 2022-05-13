@@ -37,6 +37,8 @@ function UserArea({ setTasks, setChildren, setCurrentPoints }) {
                     <Button onClick={handleLogOut}>Log Out</Button>
 
                 </ButtonGroup>
+
+                
                 
                 </div>
             </div>

@@ -5,6 +5,7 @@ import hideCat from "../images/hideCat.png";
 
 import { Route } from "react-router-dom";
 import SignUp from "./SignUp";
+// import Nav from "./Nav";
 
 function LogIn({ fetchChildren }) {
   const [formData, setFormData] = useState({
@@ -67,7 +68,18 @@ function LogIn({ fetchChildren }) {
       password: "",
     });
   }
-
+  //
+  // function handleDelete(e){
+  //   console.log('id: ', e);
+  //  console.log("cat545454455")
+  //   // fetch(`http://localhost:9292/users/${id}`, {
+  //   //   method: "DELETE",
+  //   // });
+  // }
+  // const allcats = allUsers.map(user => <Nav key={user.id} user={user}/>)
+  
+  
+  //
   return (
     <div className="LogIn">
       <div className="logo-title">BodhiCat's Chore List</div>
@@ -105,6 +117,8 @@ function LogIn({ fetchChildren }) {
           />
         </Route>
       </div>
+        
+            {/* {allcats} */}
     </div>
   );
 }
