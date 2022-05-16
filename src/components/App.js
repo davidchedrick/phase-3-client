@@ -15,8 +15,6 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [children, setChildren] = useState([]);
     const [currentPoints, setCurrentPoints] = useState(null);
-
-    console.log("currentPoints: ", currentPoints);
   
     const [isLoaded, setIsLoaded] = useState(false);
     const [logIn] = useContext(LogInContext);
@@ -104,6 +102,7 @@ function App() {
                 <Route path="/UserArea">
                     <UserArea
                         setTasks={setTasks}
+                        children={children}
                         setChildren={setChildren}
                         setCurrentPoints={setCurrentPoints}
                     />

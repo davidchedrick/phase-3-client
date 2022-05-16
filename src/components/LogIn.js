@@ -5,7 +5,6 @@ import hideCat from "../images/hideCat.png";
 
 import { Route } from "react-router-dom";
 import SignUp from "./SignUp";
-// import Nav from "./Nav";
 
 function LogIn({ fetchChildren }) {
   const [formData, setFormData] = useState({
@@ -118,7 +117,6 @@ function LogIn({ fetchChildren }) {
         </Route>
       </div>
         
-            {/* {allcats} */}
     </div>
   );
 }

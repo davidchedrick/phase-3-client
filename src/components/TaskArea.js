@@ -10,7 +10,7 @@ function TaskArea({ tasks, handleDeleteTask, userChildren, fetchTask }) {
 
 
   const childrenList = currentChildren?.map(child => 
-    <ChildCard 
+    <ChildCard  
       key={child.id}
       child={child}
       fetchTask={fetchTask}
