@@ -40,6 +40,7 @@ function App() {
     }
 
     function fetchTask(selectChild) {
+        console.log('selectChild%%%%%: ', selectChild);
         fetch(BASE_URL + `/children/${selectChild.id}`)
             .then(resp => resp.json())
             .then(task => {

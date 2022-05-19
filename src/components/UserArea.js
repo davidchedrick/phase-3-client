@@ -15,6 +15,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { UserContext, LogInContext } from "../context/user";
 import Alert from "./Alert";
+import DeleteChild from "./DeleteChild";
 
 function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     const BASE_URL = "http://localhost:9292";
@@ -22,7 +23,8 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
    
     const [currentChild, setCurrentChild] = useState("");
     const [addingChild, setAddingChild] = useState(false);
-    console.log('addingChild: ', addingChild);
+    const [deletingChild, setDeletingChild] = useState(false);
+    console.log('deletingChild: ', deletingChild);
     const [addingTask, setAddingTask] = useState(false);
     const [starPoints, setStarPoints] = useState(0);
     const [newChildTask, setNewChildTask] = useState(null);
@@ -95,6 +97,11 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         setAlert(alert => !alert);
     }
 
+    function deleteChild(){
+        console.log("catcatcat")
+        setDeletingChild(deletingChild => !deletingChild)
+    }
+
     function handleChildData(e) {
         let targetName = e.target.name;
         let targetValue = e.target.value;
@@ -120,7 +127,7 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     }
 
     useEffect(() => {
-        console.log(999999999999)
+        
         addingChild ? handlePostChild() : console.log("newChild,failed");
     }, [newChild]);
 
@@ -182,7 +189,7 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         const selectChild = children.children
             .filter(child => child.id == newChildTask)
             .map(child => child.name);
-        console.log("selectChild: ", selectChild);
+      
 
         setCurrentChild(selectChild);
     }
@@ -208,6 +215,7 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                         <Button onClick={startAddTask}>Add Tasks</Button>
 
                         <ButtonGroup className="ms-5 ">
+                            <Button onClick={deleteChild}>Delete Child</Button>
                             <Button onClick={deleteUser}>Delete Account</Button>
                         </ButtonGroup>
                     </ButtonGroup>
@@ -313,6 +321,13 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                 {alert ? <Alert 
                 setAlert={setAlert}
                  /> : null}
+
+                {deletingChild ? 
+                <DeleteChild
+                setDeletingChild={setDeletingChild}
+                    deletingChild={deletingChild} 
+                    userChildren={children}
+                /> : null}
             </div>
         </div>
     );
