@@ -14,15 +14,20 @@ import {
 } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { UserContext, LogInContext } from "../context/user";
+import Alert from "./Alert";
 
 function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     const BASE_URL = "http://localhost:9292";
+    const [alert, setAlert] = useState(false);
+   
     const [currentChild, setCurrentChild] = useState("");
     const [addingChild, setAddingChild] = useState(false);
+    console.log('addingChild: ', addingChild);
     const [addingTask, setAddingTask] = useState(false);
     const [starPoints, setStarPoints] = useState(0);
     const [newChildTask, setNewChildTask] = useState(null);
     // console.log("newChildTask: ", newChildTask);
+    const [newChild, setNewChild] = useState({})
     const [user, setUser] = useContext(UserContext);
     const [taskData, setTaskData] = useState("");
     const [childData, setChildData] = useState({
@@ -30,9 +35,9 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     });
     const [createData, setCreateData] = useState({
         body: "",
-        value: null,
-        childId: null
-    })
+        value: "",
+        childId: "",
+    });
     const [logIn, setLogIn] = useContext(LogInContext);
     const history = useHistory();
     // const [rerender, setRerender] = useState(false);
@@ -67,7 +72,8 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         })
             .then(resp => resp.json())
             .then(child => {
-                console.log(child);
+                setNewChild(child)
+                console.log("New Child!", child);
             });
     }
 
@@ -85,7 +91,9 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
             });
     }
 
-    function deleteUser() {}
+    function deleteUser() {
+        setAlert(alert => !alert);
+    }
 
     function handleChildData(e) {
         let targetName = e.target.name;
@@ -100,69 +108,73 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const newChild = {
+        const newChildObj = {
             ...childData,
             points: 0,
             user_id: user.id,
         };
 
-        addNewChild(newChild);
+        setNewChild(newChildObj)
 
-        setChildData({
-            name: "",
-        });
-    }
-
-    function createNewTask() {
-
-        setCreateData({
-            ...createData,
-            body: taskData,
-            value: starPoints,
-            child_id: newChildTask
-        })
-
-      
         
     }
 
     useEffect(() => {
+        console.log(999999999999)
+        addingChild ? handlePostChild() : console.log("newChild,failed");
+    }, [newChild]);
+
+   function handlePostChild(){
+       console.log('newChildmmmmmm: ', newChild);
+       newChild.name.length > 1
+       ? addNewChild(newChild)
+       : console.log("child data empty");
+
         
-        // setNewChildTask(newChildTask => newChildTask)
-        addingTask? handlePostTask() : console.log("createData");
-        
-        
+
+        setChildData({
+            name: "",
+        });
+        setAddingChild(false);
+    }
+
+    function createNewTask() {
+        setCreateData({
+            ...createData,
+            body: taskData,
+            value: starPoints,
+            child_id: newChildTask,
+        });
+    }
+
+    useEffect(() => {
+        addingTask ? handlePostTask() : console.log("createData");
     }, [createData]);
-    
+
     function handlePostTask() {
-       
-        createData.body.length > 1? postTask(createData) : console.log("log data")
-        
+        createData.body.length > 1
+            ? postTask(createData)
+            : console.log("log data");
 
         setCreateData({
             ...createData,
             body: "",
             value: "",
-            child_id: ""
-        })
-        setTaskData("")
-        setStarPoints(null)
-        setNewChildTask(null)
-        setAddingTask(false)
+            child_id: "",
+        });
+        setTaskData("");
+        setStarPoints(null);
+        setNewChildTask(null);
+        setAddingTask(false);
     }
 
     function handleNewChildTask(e) {
         console.log("e: ", e);
         setNewChildTask(e);
-        // checkChild(e);
-        // timedName();
     }
 
     useEffect(() => {
-        console.log("newChildTask");
-        // setNewChildTask(newChildTask => newChildTask)
         makeCurrentChild();
-        
     }, [newChildTask]);
 
     //
@@ -175,11 +187,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         setCurrentChild(selectChild);
     }
 
-    // function checkChild(e) {
-    //     if (e) makeCurrentChild()
-
-    // }
-
     function handleTaskData(e) {
         setTaskData(e);
     }
@@ -189,15 +196,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
             {child.name}
         </Dropdown.Item>
     ));
-
-    // function childName() {
-    //     const name = children.children.map(child => {
-    //         console.log('child:%%%% ', child.name, child.id);
-
-    //     })
-    //     console.log('name!!: ', name);
-    // }
-    // childName()
 
     return (
         <div>
@@ -300,10 +298,10 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                                     <h1>{taskData}</h1>
                                 </Card.Body>
 
-                                <Button 
-                                onClick={createNewTask}
-                                variant="primary" 
-                                size="lg"
+                                <Button
+                                    onClick={createNewTask}
+                                    variant="primary"
+                                    size="lg"
                                 >
                                     Create Task
                                 </Button>
@@ -311,6 +309,10 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                         </Container>
                     </div>
                 ) : null}
+
+                {alert ? <Alert 
+                setAlert={setAlert}
+                 /> : null}
             </div>
         </div>
     );

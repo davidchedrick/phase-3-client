@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { LogInContext } from "../context/user";
@@ -23,7 +23,7 @@ function App() {
    
     const BASE_URL = "http://localhost:9292";
 
-   
+   useEffect(() => {}, [])
 
     function fetchChildren(currentUser) {
         fetch(BASE_URL + `/users/${currentUser.id}`)
