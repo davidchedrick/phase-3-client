@@ -8,7 +8,6 @@ import {
     Dropdown,
     DropdownButton,
     Form,
-    // FormControl,
     InputGroup,
     Table,
 } from "react-bootstrap";
@@ -17,19 +16,26 @@ import { UserContext, LogInContext } from "../context/user";
 import Alert from "./Alert";
 import DeleteChild from "./DeleteChild";
 
-function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
+function UserArea({
+    setTasks,
+    children,
+    setChildren,
+    setCurrentPoints,
+    rerender,
+    setRerender,
+}) {
     const BASE_URL = "http://localhost:9292";
     const [alert, setAlert] = useState(false);
-   
+
     const [currentChild, setCurrentChild] = useState("");
     const [addingChild, setAddingChild] = useState(false);
     const [deletingChild, setDeletingChild] = useState(false);
-    console.log('deletingChild: ', deletingChild);
+
     const [addingTask, setAddingTask] = useState(false);
     const [starPoints, setStarPoints] = useState(0);
     const [newChildTask, setNewChildTask] = useState(null);
-    // console.log("newChildTask: ", newChildTask);
-    const [newChild, setNewChild] = useState({})
+
+    const [newChild, setNewChild] = useState({});
     const [user, setUser] = useContext(UserContext);
     const [taskData, setTaskData] = useState("");
     const [childData, setChildData] = useState({
@@ -42,7 +48,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     });
     const [logIn, setLogIn] = useContext(LogInContext);
     const history = useHistory();
-    // const [rerender, setRerender] = useState(false);
 
     function handleLogOut() {
         setLogIn(false);
@@ -64,7 +69,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     }
 
     function addNewChild(newChild) {
-        console.log("newChild: ", newChild);
         fetch("http://localhost:9292/children", {
             method: "POST",
             headers: {
@@ -74,8 +78,7 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         })
             .then(resp => resp.json())
             .then(child => {
-                setNewChild(child)
-                console.log("New Child!", child);
+                setNewChild(child);
             });
     }
 
@@ -97,9 +100,8 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         setAlert(alert => !alert);
     }
 
-    function deleteChild(){
-        console.log("catcatcat")
-        setDeletingChild(deletingChild => !deletingChild)
+    function deleteChild() {
+        setDeletingChild(deletingChild => !deletingChild);
     }
 
     function handleChildData(e) {
@@ -121,23 +123,17 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
             user_id: user.id,
         };
 
-        setNewChild(newChildObj)
-
-        
+        setNewChild(newChildObj);
     }
 
     useEffect(() => {
-        
-        addingChild ? handlePostChild() : console.log("newChild,failed");
+        addingChild ? handlePostChild() : console.log();
     }, [newChild]);
 
-   function handlePostChild(){
-       console.log('newChildmmmmmm: ', newChild);
-       newChild.name.length > 1
-       ? addNewChild(newChild)
-       : console.log("child data empty");
-
-        
+    function handlePostChild() {
+        newChild.name.length > 1
+            ? addNewChild(newChild)
+            : console.log("child data empty");
 
         setChildData({
             name: "",
@@ -155,7 +151,7 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
     }
 
     useEffect(() => {
-        addingTask ? handlePostTask() : console.log("createData");
+        addingTask ? handlePostTask() : console.log();
     }, [createData]);
 
     function handlePostTask() {
@@ -189,7 +185,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
         const selectChild = children.children
             .filter(child => child.id == newChildTask)
             .map(child => child.name);
-      
 
         setCurrentChild(selectChild);
     }
@@ -301,7 +296,6 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                                     {newChildTask ? (
                                         <h1>{currentChild}</h1>
                                     ) : null}
-                                    {/* <h1>{newChildTask}</h1> */}
                                     <h1>⭐ {starPoints}</h1>
                                     <h1>{taskData}</h1>
                                 </Card.Body>
@@ -318,16 +312,18 @@ function UserArea({ setTasks, children, setChildren, setCurrentPoints }) {
                     </div>
                 ) : null}
 
-                {alert ? <Alert 
-                setAlert={setAlert}
-                 /> : null}
+                {alert ? <Alert setAlert={setAlert} /> : null}
 
-                {deletingChild ? 
-                <DeleteChild
-                setDeletingChild={setDeletingChild}
-                    deletingChild={deletingChild} 
-                    userChildren={children}
-                /> : null}
+                {deletingChild ? (
+                    <DeleteChild
+                        setDeletingChild={setDeletingChild}
+                        deletingChild={deletingChild}
+                        userChildren={children}
+                        setChildren={setChildren}
+                        rerender={rerender}
+                        setRerender={setRerender}
+                    />
+                ) : null}
             </div>
         </div>
     );

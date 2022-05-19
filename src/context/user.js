@@ -5,7 +5,7 @@ const LogInContext = createContext();
 
 function UserProvider({ children }) {
     
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState("");
     const currentUser = [user, setUser]
 
     const [logIn, setLogIn] = useState(false);

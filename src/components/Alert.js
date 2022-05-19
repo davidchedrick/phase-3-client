@@ -6,7 +6,7 @@ import { LogInContext, UserContext } from "../context/user";
 function Alert({ setAlert }) {
     const [logIn, setLogIn] = useContext(LogInContext);
     const [user, setUser] = useContext(UserContext);
-    console.log('user: ', user);
+    console.log("user: ", user);
     const BASE_URL = "http://localhost:9292";
     const history = useHistory();
 
@@ -15,14 +15,12 @@ function Alert({ setAlert }) {
     }
 
     function handleDelete() {
-
-
         fetch(BASE_URL + `/users/${user.id}`, {
-            method: 'DELETE',
-        })
+            method: "DELETE",
+        });
+        setUser({});
         setLogIn(false);
-        setUser([]);
-          history.push("/LogIn");
+        history.push("/LogIn");
     }
 
     return (
@@ -41,10 +39,11 @@ function Alert({ setAlert }) {
                         >
                             Keep Account
                         </Button>
-                        <Button 
-                        onClick={handleDelete}
-                        variant="danger" 
-                        className="m-2">
+                        <Button
+                            onClick={handleDelete}
+                            variant="danger"
+                            className="m-2"
+                        >
                             Delete Account
                         </Button>
                     </ButtonGroup>

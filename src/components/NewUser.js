@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 
-function NewUser({ setSignInFailed, allUsers }) {
+function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -52,6 +52,8 @@ function NewUser({ setSignInFailed, allUsers }) {
     function approveUser(newUser) {
         postUser(newUser);
         setSignInFailed(false);
+        setRerender(rerender => !rerender);
+        console.log("rerenderzzzz: ", rerender);
     }
 
     function handleSubmit(e) {

@@ -14,16 +14,16 @@ import UserArea from "./UserArea";
 function App() {
     const [tasks, setTasks] = useState([]);
     const [children, setChildren] = useState([]);
+
     const [currentPoints, setCurrentPoints] = useState(null);
-  
+    const [rerender, setRerender] = useState(false);
+
     const [isLoaded, setIsLoaded] = useState(false);
     const [logIn] = useContext(LogInContext);
 
     const history = useHistory();
-   
-    const BASE_URL = "http://localhost:9292";
 
-   useEffect(() => {}, [])
+    const BASE_URL = "http://localhost:9292";
 
     function fetchChildren(currentUser) {
         fetch(BASE_URL + `/users/${currentUser.id}`)
@@ -31,7 +31,6 @@ function App() {
             .then(children => {
                 checkChildren(children);
                 setIsLoaded(true);
-               
             });
     }
 
@@ -40,14 +39,12 @@ function App() {
     }
 
     function fetchTask(selectChild) {
-        console.log('selectChild%%%%%: ', selectChild);
         fetch(BASE_URL + `/children/${selectChild.id}`)
             .then(resp => resp.json())
             .then(task => {
                 checkTask(task);
                 setIsLoaded(true);
                 setCurrentPoints(task.points);
-               
             });
     }
 
@@ -63,7 +60,6 @@ function App() {
         setTasks(updatedTask);
 
         updatePoints(currentTask);
-      
     }
 
     function updatePoints(currentTask) {
@@ -89,7 +85,11 @@ function App() {
     }
 
     if (!isLoaded)
-    return (<h2><Loading /></h2>);
+        return (
+            <h2>
+                <Loading />
+            </h2>
+        );
 
     return (
         <div className="App">
@@ -97,7 +97,11 @@ function App() {
 
             <Switch>
                 <Route path="/LogIn">
-                    <LogIn fetchChildren={fetchChildren} />
+                    <LogIn
+                        fetchChildren={fetchChildren}
+                        rerender={rerender}
+                        setRerender={setRerender}
+                    />
                 </Route>
 
                 <Route path="/UserArea">
@@ -106,6 +110,8 @@ function App() {
                         children={children}
                         setChildren={setChildren}
                         setCurrentPoints={setCurrentPoints}
+                        rerender={rerender}
+                        setRerender={setRerender}
                     />
                 </Route>
 
