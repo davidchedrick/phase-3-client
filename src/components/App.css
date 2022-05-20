@@ -89,11 +89,7 @@ body {
     -5px -3px 40px rgba(15, 1, 1, 0.75);
 }
 
-.UserArea div{
-  /* display: flex;
-  justify-content: flex-end; */
-  
-}
+
 
 .UserArea button {
   color: rgb(50, 101, 241);

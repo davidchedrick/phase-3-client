@@ -5,8 +5,6 @@ function ChildCard({
     fetchTask,
     deletingChild,
     setDeletingChild,
-    userChildren,
-    setChildren,
     rerender,
     setRerender,
 }) {
@@ -18,8 +16,7 @@ function ChildCard({
         fetch(BASE_URL + `/children/${childToDelete.id}`, {
             method: "DELETE",
         });
-        console.log("userChildren:pppp ", userChildren);
-
+       
         setRerender(rerender => !rerender);
         setDeletingChild(false);
     }

@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Route, Switch, useHistory } from "react-router-dom";
-import { LogInContext } from "../context/user";
+// import { useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { LogInContext, UserContext } from "../context/user";
 import "./App.css";
 import Header from "./Header";
 import Loading from "./Loading";
 import LogIn from "./LogIn";
-
+// import hideCat from "../images/hideCat.png";
 import StatsArea from "./StatsArea";
 import TaskArea from "./TaskArea";
 import UserArea from "./UserArea";
+// import NewUser from "./NewUser";
+// import SignUp from "./SignUp";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -19,11 +22,25 @@ function App() {
     const [rerender, setRerender] = useState(false);
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [logIn] = useContext(LogInContext);
-
-    const history = useHistory();
 
     const BASE_URL = "http://localhost:9292";
+    //LogINxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+    const [allUsers, setAllUsers] = useState("");
+    console.log("allUsers:APP ", allUsers);
+    // const [user, setUser] = useContext(UserContext);
+    const [logIn, setLogIn] = useContext(LogInContext);
+    // const history = useHistory();
+
+    useEffect(() => {
+        fetchUsers();
+    }, [rerender]);
+
+    function fetchUsers() {
+        fetch(BASE_URL + `/users`)
+            .then(resp => resp.json())
+            .then(users => setAllUsers(users));
+    }
 
     function fetchChildren(currentUser) {
         fetch(BASE_URL + `/users/${currentUser.id}`)
@@ -79,7 +96,7 @@ function App() {
     if (!logIn) {
         return (
             <div className="App">
-                <LogIn fetchChildren={fetchChildren} />
+                <LogIn fetchChildren={fetchChildren} allUsers={allUsers} />
             </div>
         );
     }
@@ -101,6 +118,11 @@ function App() {
                         fetchChildren={fetchChildren}
                         rerender={rerender}
                         setRerender={setRerender}
+                        // handleSubmit={handleSubmit}
+                        // handleFormData={handleFormData}
+                        // signInFailed={signInFailed}
+                        // setSignInFailed={setSignInFailed}
+                        allUsers={allUsers}
                     />
                 </Route>
 
