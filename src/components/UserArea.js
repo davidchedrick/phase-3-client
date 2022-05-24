@@ -1,5 +1,3 @@
-import { useHistory } from "react-router-dom";
-
 import {
     Button,
     ButtonGroup,
@@ -11,6 +9,7 @@ import {
     InputGroup,
     Table,
 } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext, LogInContext } from "../context/user";
 import Alert from "./Alert";
@@ -23,6 +22,9 @@ function UserArea({
     setCurrentPoints,
     rerender,
     setRerender,
+    rerenderChildren,
+    setRerenderChildren,
+    tasks,
 }) {
     const BASE_URL = "http://localhost:9292";
     const [alert, setAlert] = useState(false);
@@ -78,7 +80,9 @@ function UserArea({
         })
             .then(resp => resp.json())
             .then(child => {
-                setNewChild(child);
+                console.log(child)
+                setRerender(rerender => !rerender);
+                setRerenderChildren(rerenderChildren => !rerenderChildren);
             });
     }
 
@@ -92,7 +96,7 @@ function UserArea({
         })
             .then(resp => resp.json())
             .then(task => {
-                console.log("task: ", task);
+                setTasks([...tasks, task]);
             });
     }
 
@@ -330,55 +334,87 @@ function UserArea({
 
 export default UserArea;
 
-    function NewTask({handleNewChildTask, childList, handleTaskData, starPoints, e, setStarPoints, newChildTask, currentChild, taskData, createNewTask}) {
-      return (<div>
-                        <InputGroup className="mb-3">
-                            <DropdownButton variant="outline-secondary" title="Child" id="input-group-dropdown-1" onSelect={handleNewChildTask}>
-                                {childList}
-                            </DropdownButton>
+function NewTask({
+    handleNewChildTask,
+    childList,
+    handleTaskData,
+    starPoints,
+    e,
+    setStarPoints,
+    newChildTask,
+    currentChild,
+    taskData,
+    createNewTask,
+}) {
+    return (
+        <div>
+            <InputGroup className="mb-3">
+                <DropdownButton
+                    variant="outline-secondary"
+                    title="Child"
+                    id="input-group-dropdown-1"
+                    onSelect={handleNewChildTask}
+                >
+                    {childList}
+                </DropdownButton>
 
-                            <DropdownButton variant="outline-secondary" title="Task" id="input-group-dropdown-1" onSelect={handleTaskData}>
-                                <Dropdown.Item eventKey={"Make Bed"}>
-                                    Make Bed
-                                </Dropdown.Item>
-                                <Dropdown.Item eventKey={"Read Book"}>
-                                    Read Book
-                                </Dropdown.Item>
-                                <Dropdown.Item eventKey={"Clean Room"}>
-                                    Clean Room
-                                </Dropdown.Item>
-                                <Dropdown.Item eventKey={"Feed Pet"}>
-                                    Feed Pet
-                                </Dropdown.Item>
-                                <Dropdown.Item eventKey={"Set Plates"}>
-                                    Set Plates
-                                </Dropdown.Item>
-                            </DropdownButton>
+                <DropdownButton
+                    variant="outline-secondary"
+                    title="Task"
+                    id="input-group-dropdown-1"
+                    onSelect={handleTaskData}
+                >
+                    <Dropdown.Item eventKey={"Make Bed"}>
+                        Make Bed
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey={"Read Book"}>
+                        Read Book
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey={"Clean Room"}>
+                        Clean Room
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey={"Feed Pet"}>
+                        Feed Pet
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey={"Set Plates"}>
+                        Set Plates
+                    </Dropdown.Item>
+                </DropdownButton>
 
-                            <DropdownButton variant="outline-secondary" title="⭐ Value" id="input-group-dropdown-1">
-                                <Table striped bordered hover variant="dark">
-                                    <tbody>
-                                        <tr>
-                                            <td>{starPoints}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                                <Form.Range min="0" max="20" value={starPoints} step="1" onChange={e => setStarPoints(e.target.value)} />
-                            </DropdownButton>
-                        </InputGroup>
-                        <Container className="position-relative">
-                            <Card className="position-absolute top-50 start-50 ranslate-middle-x">
-                                <Card.Body className="p-0 ">
-                                    {newChildTask ? <h1>{currentChild}</h1> : null}
-                                    <h1>⭐ {starPoints}</h1>
-                                    <h1>{taskData}</h1>
-                                </Card.Body>
+                <DropdownButton
+                    variant="outline-secondary"
+                    title="⭐ Value"
+                    id="input-group-dropdown-1"
+                >
+                    <Table striped bordered hover variant="dark">
+                        <tbody>
+                            <tr>
+                                <td>{starPoints}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    <Form.Range
+                        min="0"
+                        max="20"
+                        value={starPoints}
+                        step="1"
+                        onChange={e => setStarPoints(e.target.value)}
+                    />
+                </DropdownButton>
+            </InputGroup>
+            <Container className="position-relative">
+                <Card className="position-absolute top-50 start-50 ranslate-middle-x">
+                    <Card.Body className="p-0 ">
+                        {newChildTask ? <h1>{currentChild}</h1> : null}
+                        <h1>⭐ {starPoints}</h1>
+                        <h1>{taskData}</h1>
+                    </Card.Body>
 
-                                <Button onClick={createNewTask} variant="primary" size="lg">
-                                    Create Task
-                                </Button>
-                            </Card>
-                        </Container>
-                    </div>);
-    }
-  
+                    <Button onClick={createNewTask} variant="primary" size="lg">
+                        Create Task
+                    </Button>
+                </Card>
+            </Container>
+        </div>
+    );
+}
