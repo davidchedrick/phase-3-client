@@ -1,67 +1,58 @@
 import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-
 import { Route, Switch } from "react-router-dom";
 import { LogInContext, UserContext } from "../context/user";
 import "./App.css";
 import Header from "./Header";
 import Loading from "./Loading";
 import LogIn from "./LogIn";
-
 import StatsArea from "./StatsArea";
 import TaskArea from "./TaskArea";
 import UserArea from "./UserArea";
 
-
 function App() {
     const [tasks, setTasks] = useState([]);
     const [children, setChildren] = useState([]);
-    console.log('children: ', children.children);
     const [currentPoints, setCurrentPoints] = useState(null);
     const [rerender, setRerender] = useState(false);
     const [rerenderChildren, setRerenderChildren] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    const BASE_URL = "http://localhost:9292";
     const [allUsers, setAllUsers] = useState("");
     const [user, setUser] = useContext(UserContext);
     const [logIn, setLogIn] = useContext(LogInContext);
-  
+    const BASE_URL = "http://localhost:9292";
 
     useEffect(() => {
         fetchUsers();
-        setRerenderChildren(rerenderChildren => !rerenderChildren)
+        console.log("jsajkajksjkajskjskaj")
+        setRerenderChildren(rerenderChildren => !rerenderChildren);
     }, [rerender]);
 
     useEffect(() => {
-      if (children.length !== 0) fetchChildren(user) 
-        
+        console.log(children)
+        if (children.length !== 0 || children.children === typeof("undefined")) fetchChildren(user);
     }, [rerenderChildren]);
 
-    // useEffect(() => {
-    //     fetchTask();
-    //     setRerenderChildren(rerenderChildren => !rerenderChildren)
-    // }, [rerender]);
-
-    function fetchUsers() {
+    const fetchUsers = () => {
         fetch(BASE_URL + `/users`)
             .then(resp => resp.json())
             .then(users => setAllUsers(users));
-    }
+    };
 
-    function fetchChildren(currentUser) {
+    const fetchChildren = currentUser => {
         fetch(BASE_URL + `/users/${currentUser.id}`)
             .then(resp => resp.json())
             .then(children => {
                 checkChildren(children);
                 setIsLoaded(true);
             });
-    }
+    };
 
-    function checkChildren(children) {
+    const checkChildren = (children) => {
         if (children) setChildren(children);
     }
 
-    function fetchTask(selectChild) {
+    const fetchTask = selectChild => {
         fetch(BASE_URL + `/children/${selectChild.id}`)
             .then(resp => resp.json())
             .then(task => {
@@ -69,23 +60,20 @@ function App() {
                 setIsLoaded(true);
                 setCurrentPoints(task.points);
             });
-    }
+    };
 
-    function checkTask(task) {
-        if (task) setTasks(task.tasks);
-    }
+    const checkTask = task => (task ? setTasks(task.tasks) : null);
 
-    function handleDeleteTask(currentTask) {
+    const handleDeleteTask = currentTask => {
         fetch(BASE_URL + `/tasks/${currentTask.id}`, {
             method: "DELETE",
         });
         const updatedTask = tasks.filter(task => task.id !== currentTask.id);
         setTasks(updatedTask);
-
         updatePoints(currentTask);
-    }
+    };
 
-    function updatePoints(currentTask) {
+    const updatePoints = currentTask => {
         const addPoints = currentPoints + currentTask.value;
 
         fetch(BASE_URL + `/children/${currentTask.child_id}/points`, {
@@ -97,7 +85,7 @@ function App() {
         })
             .then(resp => resp.json())
             .then(newPoints => setCurrentPoints(newPoints.points));
-    }
+    };
 
     if (!logIn) {
         return (
@@ -124,10 +112,6 @@ function App() {
                         fetchChildren={fetchChildren}
                         rerender={rerender}
                         setRerender={setRerender}
-                        // handleSubmit={handleSubmit}
-                        // handleFormData={handleFormData}
-                        // signInFailed={signInFailed}
-                        // setSignInFailed={setSignInFailed}
                         allUsers={allUsers}
                     />
                 </Route>
@@ -143,7 +127,6 @@ function App() {
                         rerenderChildren={rerenderChildren}
                         setRerenderChildren={setRerenderChildren}
                         tasks={tasks}
-
                     />
                 </Route>
 

@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     const [pendingUser, setPendingUser] = useState({});
     const [isDisabled, setIsDisabled] = useState(true);
     const [signUpFailed, setSignUpFailed] = useState(false);
+    const history = useHistory();
     const BASE_URL = "http://localhost:9292";
 
     function postUser(newUser) {
@@ -22,7 +24,11 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
             .then(resp => resp.json())
             .then(user => {
                 console.log("user: ", user);
+                setRerender(rerender => !rerender);
+                history.push("/")
+                
             });
+            
     }
 
     function handleFormData(e) {
@@ -52,8 +58,6 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     function approveUser(newUser) {
         postUser(newUser);
         setSignInFailed(false);
-        setRerender(rerender => !rerender);
-        console.log("rerenderzzzz: ", rerender);
     }
 
     function handleSubmit(e) {

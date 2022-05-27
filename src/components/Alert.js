@@ -3,10 +3,9 @@ import { Button, ButtonGroup, Card, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { LogInContext, UserContext } from "../context/user";
 
-function Alert({ setAlert }) {
+function Alert({ setAlert, rerender, setRerender }) {
     const [logIn, setLogIn] = useContext(LogInContext);
     const [user, setUser] = useContext(UserContext);
-    console.log("user: ", user);
     const BASE_URL = "http://localhost:9292";
     const history = useHistory();
 
@@ -18,8 +17,10 @@ function Alert({ setAlert }) {
         fetch(BASE_URL + `/users/${user.id}`, {
             method: "DELETE",
         });
+        
         setUser({});
         setLogIn(false);
+        setRerender(rerender => !rerender)
         history.push("/LogIn");
     }
 

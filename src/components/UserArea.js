@@ -1,3 +1,8 @@
+import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { UserContext, LogInContext } from "../context/user";
+import Alert from "./Alert";
+import DeleteChild from "./DeleteChild";
 import {
     Button,
     ButtonGroup,
@@ -9,11 +14,6 @@ import {
     InputGroup,
     Table,
 } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { UserContext, LogInContext } from "../context/user";
-import Alert from "./Alert";
-import DeleteChild from "./DeleteChild";
 
 function UserArea({
     setTasks,
@@ -315,7 +315,11 @@ function UserArea({
                     </div>
                 ) : null}
 
-                {alert ? <Alert setAlert={setAlert} /> : null}
+                {alert ? <Alert 
+                    setAlert={setAlert} 
+                    setRerender={setRerender}
+                    rerender={rerender}
+                /> : null}
 
                 {deletingChild ? (
                     <DeleteChild
