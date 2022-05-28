@@ -80,7 +80,7 @@ function UserArea({
         })
             .then(resp => resp.json())
             .then(child => {
-                console.log(child)
+                console.log(child);
                 setRerender(rerender => !rerender);
                 setRerenderChildren(rerenderChildren => !rerenderChildren);
             });
@@ -315,11 +315,13 @@ function UserArea({
                     </div>
                 ) : null}
 
-                {alert ? <Alert 
-                    setAlert={setAlert} 
-                    setRerender={setRerender}
-                    rerender={rerender}
-                /> : null}
+                {alert ? (
+                    <Alert
+                        setAlert={setAlert}
+                        setRerender={setRerender}
+                        rerender={rerender}
+                    />
+                ) : null}
 
                 {deletingChild ? (
                     <DeleteChild

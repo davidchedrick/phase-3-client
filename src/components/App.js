@@ -24,7 +24,7 @@ function App() {
 
     useEffect(() => {
         fetchUsers();
-        console.log("jsajkajksjkajskjskaj")
+        console.log("fetch Users ####")
         setRerenderChildren(rerenderChildren => !rerenderChildren);
     }, [rerender]);
 

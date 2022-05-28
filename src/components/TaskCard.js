@@ -7,9 +7,9 @@ import plate from "../images/plate.webp";
 import { Card, Button } from "react-bootstrap";
 
 function TaskCard({ task, handleDeleteTask }) {
-    const { body, value, id } = task;
+    const { body, value } = task;
 
-    function img(body) {
+    const img = body => {
         switch (body) {
             case "Make Bed":
                 return bed;
@@ -23,7 +23,7 @@ function TaskCard({ task, handleDeleteTask }) {
                 return plate;
             default:
         }
-    }
+    };
 
     return (
         <Card className="w-25 m-3 ">

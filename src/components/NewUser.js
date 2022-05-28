@@ -1,6 +1,6 @@
-import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
     const history = useHistory();
     const BASE_URL = "http://localhost:9292";
 
-    function postUser(newUser) {
+    const postUser = newUser => {
         fetch(BASE_URL + `/users`, {
             method: "POST",
             headers: {
@@ -25,13 +25,11 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
             .then(user => {
                 console.log("user: ", user);
                 setRerender(rerender => !rerender);
-                history.push("/")
-                
+                history.push("/");
             });
-            
-    }
+    };
 
-    function handleFormData(e) {
+    const handleFormData = e => {
         let targetName = e.target.name;
         let targetValue = e.target.value;
 
@@ -39,9 +37,9 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
             ...formData,
             [targetName]: targetValue,
         });
-    }
+    };
 
-    function checkUser() {
+    const checkUser = () => {
         const check = allUsers.filter(
             names => names.username !== pendingUser.username
         );
@@ -53,14 +51,14 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
             setSignUpFailed(true);
             setIsDisabled(true);
         }
-    }
+    };
 
-    function approveUser(newUser) {
+    const approveUser = newUser => {
         postUser(newUser);
         setSignInFailed(false);
-    }
+    };
 
-    function handleSubmit(e) {
+    const handleSubmit = e => {
         e.preventDefault();
         setPendingUser(formData);
 
@@ -69,7 +67,7 @@ function NewUser({ setSignInFailed, allUsers, setRerender, rerender }) {
             username: "",
             password: "",
         });
-    }
+    };
 
     return (
         <div>

@@ -1,16 +1,15 @@
 import { useContext, useState } from "react";
+import { useHistory, Route } from "react-router-dom";
 import { UserContext, LogInContext } from "../context/user";
-import { useHistory } from "react-router-dom";
-import { Route } from "react-router-dom";
 import hideCat from "../images/hideCat.png";
 import SignUp from "./SignUp";
 
 function LogIn({ fetchChildren, rerender, allUsers, setRerender }) {
-    const [signInFailed, setSignInFailed] = useState(false);
     const [formData, setFormData] = useState({
         username: "",
         password: "",
     });
+    const [signInFailed, setSignInFailed] = useState(false);
     const [user, setUser] = useContext(UserContext);
     const [logIn, setLogIn] = useContext(LogInContext);
     const history = useHistory();
