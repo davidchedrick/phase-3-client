@@ -21,25 +21,33 @@ BodhiCat's Chore List is a web application built on the client side with React. 
 
 ## Backend
 
-# https://github.com/sinatra/sinatra
+https://github.com/sinatra/sinatra
 
+```
 gem "sinatra", "~> 2.1"
+```
 
-# https://guides.rubyonrails.org/active_record_basics.html
+https://guides.rubyonrails.org/active_record_basics.html
 
+```
 gem "activerecord", "~> 6.1"
+```
 
-# https://github.com/sinatra-activerecord/sinatra-activerecord
+https://github.com/sinatra-activerecord/sinatra-activerecord
 
+```
 gem "sinatra-activerecord", "~> 2.0"
+```
 
-# https://github.com/ruby/rake
+https://github.com/ruby/rake
 
+```
 gem "rake", "~> 13.0"
+```
 
-# Provides functionality to interact with a SQLite3 database
-
+```
 gem "sqlite3", "~> 1.4"
+```
 
 ---
 
