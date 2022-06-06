@@ -1,71 +1,85 @@
-# Getting Started with Create React App
+# BodhiCat's Chore List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sign In and start posting your favorite cutie cats!
+or Sign Up with a username and password
 
-## Available Scripts
+You can:
 
-In the project directory, you can run:
+-   Create children profile.
+-   Pick chores for each child.
+-   Set a value to each chore.
 
-### `npm start`
+Your child can:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-   Complete chores to earn points.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+BodhiCat's Chore List is a web application built on the client side with React. It is styled with Bootstrap, React-Bootstrap, and Styled-Components. The server side is with Ruby, Sinatra, Active Record, and SQLite.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# https://github.com/sinatra/sinatra
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+gem "sinatra", "~> 2.1"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# https://guides.rubyonrails.org/active_record_basics.html
 
-### `npm run eject`
+gem "activerecord", "~> 6.1"
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# https://github.com/sinatra-activerecord/sinatra-activerecord
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+gem "sinatra-activerecord", "~> 2.0"
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# https://github.com/ruby/rake
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+gem "rake", "~> 13.0"
 
-## Learn More
+# Provides functionality to interact with a SQLite3 database
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+gem "sqlite3", "~> 1.4"
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[npm](https://docs.npmjs.com/cli/v8/commands/npm-install)
 
-### Analyzing the Bundle Size
+```
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[react-bootstrap](https://react-bootstrap.github.io/getting-started/introduction/)
 
-### Making a Progressive Web App
+```
+npm install react-bootstrap bootstrap@5.1.3
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[bootstrap](https://www.npmjs.com/package/bootstrap)
 
-### Advanced Configuration
+```
+npm install bootstrap
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[styled-components](https://styled-components.com/docs/basics#installation)
 
-### Deployment
+```
+npm install --save styled-components
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[react-router](https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md)
 
-### `npm run build` fails to minify
+```
+npm install react-router-dom@5
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# phase-3-client
+---
+
+## Chore Images
+
+BodhiCat cat logo is a Tyler Cat original.
+
+All other images used are from:
+[Freepik](https://www.freepik.com/)
